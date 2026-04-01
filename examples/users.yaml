@@ -1,0 +1,49 @@
+suite: user-tests
+tests:
+  - name: list users
+    request:
+      method: GET
+      path: /users
+    expect:
+      status: 200
+      headers:
+        Content-Type: application/json
+      schema:
+        type: array
+        items:
+          type: object
+          required: [id, name]
+
+  - name: create user
+    request:
+      method: POST
+      path: /users
+      headers:
+        Content-Type: application/json
+      json:
+        name: Jane Doe
+        email: jane@example.com
+    expect:
+      status: 201
+      body:
+        id: exists
+        name: Jane Doe
+    extract:
+      new_user_id: id
+
+  - name: get created user
+    request:
+      method: GET
+      path: /users/${new_user_id}
+    expect:
+      status: 200
+      body:
+        name: Jane Doe
+        email: "regex:^[\\w.]+@\\w+\\.\\w+$"
+
+  - name: user not found
+    request:
+      method: GET
+      path: /users/99999
+    expect:
+      status: 404

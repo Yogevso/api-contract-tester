@@ -1,0 +1,56 @@
+suite: auth-tests
+tests:
+  - name: login success
+    request:
+      method: POST
+      path: /auth/login
+      headers:
+        Content-Type: application/json
+      json:
+        email: test@example.com
+        password: secret123
+    expect:
+      status: 200
+      headers:
+        Content-Type: application/json
+      body:
+        token: exists
+        user.id: exists
+      max_response_time_ms: 500
+      schema:
+        type: object
+        required: [token, user]
+        properties:
+          token:
+            type: string
+          user:
+            type: object
+            required: [id, email]
+    extract:
+      auth_token: token
+      user_id: user.id
+
+  - name: access protected resource
+    request:
+      method: GET
+      path: /users/${user_id}
+      headers:
+        Authorization: Bearer ${auth_token}
+    expect:
+      status: 200
+      body:
+        email: "contains:@"
+
+  - name: login invalid password
+    request:
+      method: POST
+      path: /auth/login
+      headers:
+        Content-Type: application/json
+      json:
+        email: test@example.com
+        password: wrong
+    expect:
+      status: 401
+      body:
+        error: exists
