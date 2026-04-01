@@ -1,0 +1,18 @@
+{
+  "suite": "sample-suite-json",
+  "tests": [
+    {
+      "name": "health check",
+      "request": {
+        "method": "GET",
+        "path": "/health"
+      },
+      "expect": {
+        "status": 200,
+        "body": {
+          "status": "ok"
+        }
+      }
+    }
+  ]
+}

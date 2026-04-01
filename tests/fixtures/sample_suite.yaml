@@ -1,0 +1,21 @@
+suite: sample-suite
+tests:
+  - name: basic GET test
+    request:
+      method: GET
+      path: /status
+    expect:
+      status: 200
+
+  - name: POST with body
+    request:
+      method: POST
+      path: /echo
+      headers:
+        Content-Type: application/json
+      json:
+        message: hello
+    expect:
+      status: 200
+      body:
+        message: hello
