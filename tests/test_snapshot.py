@@ -2,14 +2,8 @@
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
-
-import pytest
-
 from api_contract_tester.executor import ResponseData
 from api_contract_tester.snapshot import (
-    SnapshotResult,
     compare_snapshot,
     load_snapshot,
     save_snapshot,

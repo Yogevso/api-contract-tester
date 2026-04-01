@@ -168,7 +168,7 @@ def _print_test_list(suites, total_tests):
 
 def _print_dry_run(suites, base_url, total_tests):
     """Show execution plan without making HTTP calls."""
-    console.print(f"\n[bold yellow]Dry run[/bold yellow] — no requests will be made\n")
+    console.print("\n[bold yellow]Dry run[/bold yellow] — no requests will be made\n")
     console.print(f"  Base URL:  [bold]{base_url}[/bold]")
     console.print(f"  Suites:    {len(suites)}")
     console.print(f"  Tests:     {total_tests}\n")
@@ -289,7 +289,7 @@ async def _run_suites(
         print_snapshot_summary(snapshot_results, total_time)
 
     if snapshot:
-        console.print(f"\n  [green]✓[/green] Snapshots saved to [bold].snapshots/[/bold]")
+        console.print("\n  [green]✓[/green] Snapshots saved to [bold].snapshots/[/bold]")
 
     return all_results, total_time
 
@@ -306,7 +306,9 @@ def _build_request_info(verbose, ctx, test_def, response):
     }
 
 
-def _handle_snapshots(snapshot, compare_snapshot_flag, test_path, suite, test_def, response, snapshot_results):
+def _handle_snapshots(
+    snapshot, compare_snapshot_flag, test_path, suite, test_def, response, snapshot_results
+):
     """Save or compare snapshots depending on flags."""
     if not test_path:
         return

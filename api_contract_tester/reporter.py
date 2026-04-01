@@ -184,7 +184,6 @@ def generate_junit_report(results: list[TestResult], total_time_ms: float) -> st
 
 def print_diff_result(diff: "ResponseDiff") -> None:  # noqa: F821 (forward ref)
     """Print a single diff comparison result."""
-    from api_contract_tester.diff import ResponseDiff  # noqa: F811
 
     if diff.identical:
         status = Text(" SAME ", style="bold white on green")

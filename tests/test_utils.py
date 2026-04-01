@@ -2,10 +2,6 @@
 
 from __future__ import annotations
 
-import os
-
-import pytest
-
 from api_contract_tester.utils import (
     deep_substitute,
     resolve_dot_path,

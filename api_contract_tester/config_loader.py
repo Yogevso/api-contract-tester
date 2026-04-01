@@ -10,7 +10,6 @@ from pydantic import ValidationError
 
 from api_contract_tester.models import TestSuite
 
-
 SUPPORTED_EXTENSIONS = {".yaml", ".yml", ".json"}
 
 

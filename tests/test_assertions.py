@@ -2,10 +2,7 @@
 
 from __future__ import annotations
 
-import pytest
-
 from api_contract_tester.assertions import (
-    AssertionResult,
     assert_body_field,
     assert_header,
     assert_json_schema,

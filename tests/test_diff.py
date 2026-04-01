@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from api_contract_tester.diff import FieldDiff, ResponseDiff, compare_responses, _flatten
+from api_contract_tester.diff import _flatten, compare_responses
 from api_contract_tester.executor import ResponseData
 
 

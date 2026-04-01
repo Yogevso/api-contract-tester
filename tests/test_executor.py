@@ -115,7 +115,9 @@ class TestExecutor:
 
     @pytest.mark.asyncio
     async def test_non_json_response(self, httpserver, ctx):
-        httpserver.expect_request("/text").respond_with_data("plain text", content_type="text/plain")
+        httpserver.expect_request("/text").respond_with_data(
+            "plain text", content_type="text/plain"
+        )
         test = TestDefinition(
             name="text response",
             request=RequestDefinition(method="GET", path="/text"),

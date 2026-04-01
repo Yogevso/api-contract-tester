@@ -9,7 +9,6 @@ from typing import Any
 
 from api_contract_tester.executor import ResponseData
 
-
 SNAPSHOT_DIR = ".snapshots"
 
 
@@ -98,7 +97,8 @@ def compare_snapshot(
         ))
 
     # Body
-    snap_flat = _flatten(snapshot.get("body")) if isinstance(snapshot.get("body"), (dict, list)) else {}
+    snap_body = snapshot.get("body")
+    snap_flat = _flatten(snap_body) if isinstance(snap_body, (dict, list)) else {}
     resp_flat = _flatten(response.body) if isinstance(response.body, (dict, list)) else {}
     all_keys = sorted(set(snap_flat) | set(resp_flat))
 
@@ -106,7 +106,9 @@ def compare_snapshot(
         snap_val = snap_flat.get(key, "<missing>")
         resp_val = resp_flat.get(key, "<missing>")
         if snap_val != resp_val:
-            mismatches.append(SnapshotMismatch(path=f"body.{key}", expected=snap_val, actual=resp_val))
+            mismatches.append(SnapshotMismatch(
+                path=f"body.{key}", expected=snap_val, actual=resp_val
+            ))
 
     return SnapshotResult(
         test_name=test_name,

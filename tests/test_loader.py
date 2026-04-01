@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 import pytest
@@ -10,7 +9,6 @@ import yaml
 
 from api_contract_tester.config_loader import discover_files, load_all, load_file
 from api_contract_tester.models import TestSuite
-
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

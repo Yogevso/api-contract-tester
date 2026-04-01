@@ -5,8 +5,6 @@ from __future__ import annotations
 import json
 from xml.etree.ElementTree import fromstring
 
-import pytest
-
 from api_contract_tester.assertions import AssertionResult, TestResult
 from api_contract_tester.reporter import (
     generate_json_report,
