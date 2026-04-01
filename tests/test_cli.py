@@ -2,12 +2,19 @@
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 from typer.testing import CliRunner
 
 from api_contract_tester.cli import app
 from api_contract_tester.exit_codes import ExitCode
+
+_ANSI_RE = re.compile(r"\x1b\[[0-9;]*m")
+
+
+def _strip_ansi(text: str) -> str:
+    return _ANSI_RE.sub("", text)
 
 runner = CliRunner()
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -22,14 +29,15 @@ class TestCLI:
     def test_run_help(self):
         result = runner.invoke(app, ["run", "--help"])
         assert result.exit_code == 0
-        assert "--base-url" in result.output
-        assert "--json-report" in result.output
-        assert "--junit-report" in result.output
-        assert "--dry-run" in result.output
-        assert "--list" in result.output
-        assert "--parallel" in result.output
-        assert "--snapshot" in result.output
-        assert "--compare-snapshot" in result.output
+        output = _strip_ansi(result.output)
+        assert "--base-url" in output
+        assert "--json-report" in output
+        assert "--junit-report" in output
+        assert "--dry-run" in output
+        assert "--list" in output
+        assert "--parallel" in output
+        assert "--snapshot" in output
+        assert "--compare-snapshot" in output
 
     def test_version(self):
         result = runner.invoke(app, ["--version"])
@@ -127,8 +135,9 @@ class TestDiffCommand:
     def test_diff_help(self):
         result = runner.invoke(app, ["diff", "--help"])
         assert result.exit_code == 0
-        assert "--base-url" in result.output
-        assert "--compare-url" in result.output
+        output = _strip_ansi(result.output)
+        assert "--base-url" in output
+        assert "--compare-url" in output
 
     def test_diff_missing_path(self):
         result = runner.invoke(
