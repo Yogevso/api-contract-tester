@@ -1,4 +1,6 @@
-# api-contract-tester
+# API Contract Tester
+
+> **Part of the [Orchestrix Platform](https://github.com/Yogevso/Orchestrix-Platform)** — the API contract validation layer for CI and local development.
 
 A production-style CLI tool for validating HTTP API contracts through declarative test definitions.
 
